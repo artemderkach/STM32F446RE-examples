@@ -1,34 +1,3 @@
-/*
-*****************************************************************************
-**
-
-**  File        : LinkerScript.ld
-**
-**  Abstract    : Linker script for STM32F446RETx Device with
-**                512KByte FLASH, 128KByte RAM
-**
-**                Set heap size, stack size and stack location according
-**                to application requirements.
-**
-**                Set memory bank area and size if external memory is used.
-**
-**  Target      : STMicroelectronics STM32
-**
-**
-**  Distribution: The file is distributed as is, without any warranty
-**                of any kind.
-**
-**  (c)Copyright Ac6.
-**  You may use this file as-is or modify it according to the needs of your
-**  project. Distribution of this file (unmodified or modified) is not
-**  permitted. Ac6 permit registered System Workbench for MCU users the
-**  rights to distribute the assembled, compiled & linked contents of this
-**  file as part of an application binary file, provided that it is built
-**  using the System Workbench for MCU toolchain.
-**
-*****************************************************************************
-*/
-
 /* Entry Point */
 ENTRY(Reset_Handler)
 
@@ -39,39 +8,31 @@ _Min_Heap_Size = 0x200;;      /* required amount of heap  */
 _Min_Stack_Size = 0x400;; /* required amount of stack */
 
 /* Specify the memory areas */
-MEMORY
-{
-FLASH (rx)      : ORIGIN = 0x8000000, LENGTH = 512K
-RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 128K
+MEMORY {
+    FLASH (rx)  : ORIGIN = 0x08000000, LENGTH = 512K
+    RAM (xrw)   : ORIGIN = 0x20000000, LENGTH = 128K
 }
 
 /* Define output sections */
-SECTIONS
-{
-  /* The startup code goes first into FLASH */
-  .isr_vector :
-  {
-    . = ALIGN(4);
-    KEEP(*(.isr_vector)) /* Startup code */
-    . = ALIGN(4);
-  } >FLASH
+SECTIONS {
+    .isr_vector : {
+        KEEP(*(.isr_vector))
+    } > FLASH
 
-  /* The program code and other data goes into FLASH */
-  .text :
-  {
-    . = ALIGN(4);
-    *(.text)           /* .text sections (code) */
-    *(.text*)          /* .text* sections (code) */
-    *(.glue_7)         /* glue arm to thumb code */
-    *(.glue_7t)        /* glue thumb to arm code */
-    *(.eh_frame)
+    .text : {
+        . = ALIGN(4);
+        *(.text)           /* .text sections (code) */
+        *(.text*)          /* .text* sections (code) */
+        *(.glue_7)         /* glue arm to thumb code */
+        *(.glue_7t)        /* glue thumb to arm code */
+        *(.eh_frame)
 
-    KEEP (*(.init))
-    KEEP (*(.fini))
+        KEEP (*(.init))
+        KEEP (*(.fini))
 
-    . = ALIGN(4);
-    _etext = .;        /* define a global symbols at end of code */
-  } >FLASH
+        . = ALIGN(4);
+        _etext = .;        /* define a global symbols at end of code */
+    } >FLASH
 
   /* Constant data goes into FLASH */
   .rodata :
