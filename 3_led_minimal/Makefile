@@ -16,11 +16,6 @@ MDFLAGS = -masm-syntax-unified -mlittle-endian -mthumb -mcpu=cortex-m4 -march=ar
 
 target = blinky.elf
 
-ifeq ($(DEBUG), 1)
-CFLAGS += -g -gdwarf-2
-endif
-
-
 target: $(OBJS)
 	$(CC) -o blinky.elf $^ $(MDFLAGS) $(LDFLAGS)
 
