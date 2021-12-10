@@ -1,5 +1,4 @@
-.PHONY: build
-build:
+all:
 	mkdir -p build
 	arm-none-eabi-gcc -c -o build/startup_stm32f446xx.o startup_stm32f446xx.s
 	arm-none-eabi-gcc -mthumb -c -o build/main.o main.c

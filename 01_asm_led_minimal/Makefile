@@ -1,5 +1,4 @@
-.PHONY: build
-build:
+all:
 	mkdir -p build
 	arm-none-eabi-gcc -mcpu=cortex-m4 -c -o build/main.o main.s
 	arm-none-eabi-gcc -nostartfiles -TSTM32F446RETx.ld -o build/main.elf build/main.o
