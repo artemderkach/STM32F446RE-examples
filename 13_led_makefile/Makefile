@@ -1,5 +1,5 @@
-# $@ - prerequisite
-# $^ - target
+# $@ - target
+# $^ - prerequisite
 
 SRCS = main.c startup_stm32f446xx.S
 
@@ -18,7 +18,7 @@ LDFLAGS += -TSTM32F446RETx.ld
 MDFLAGS = -mthumb
 
 all: $(OBJS)
-	$(CC) $(LDFLAGS) -o blinky.elf $^
+	$(CC) $(LDFLAGS) -o main.elf $^
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(MDFLAGS) -c -o $@ $^
@@ -30,9 +30,9 @@ all: $(OBJS)
 	$(CC) $(CFLAGS) -c -o $@ $^
 
 flash:
-	openocd -f board/st_nucleo_f4.cfg -c "program blinky.elf verify reset exit"
+	openocd -f board/st_nucleo_f4.cfg -c "program main.elf verify reset exit"
 
 clean:
-	rm -f $(OBJS) blinky.elf
+	rm -f $(OBJS) main.elf
 
 print-%: ; @echo $* = $($*)
