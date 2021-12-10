@@ -11,6 +11,7 @@ Examples are listed with incremental complexity, next one adds new element to ex
 - [03_asm_led_ram](#03_asm_led_ram)
 - [11_led_minimal](#11_led_minimal)
 - [12_led_minimal_constants](#12_led_minimal_constants)
+- [13_led_minimal_makefile](#13_led_minimal_makefile)
 
 ## 01_asm_led_minimal
 Minimal representation of turning on LED using assembler
@@ -36,3 +37,6 @@ Added:
  
 ## 12_led_minimal_constants
 Same as `11_led_minimal` but `#define` is used for variables
+
+## 13_led_minimal_makefile
+Same as `12_led_minimal_constants` but `Makefile` is now fancy
