@@ -16,6 +16,10 @@ Examples are listed with incremental complexity, next one adds new element to ex
 - [15_blinky](#15_blinky)
 - [16_blinky_seconds](#16_blinky_seconds)
 - [20_struct](#20_struct)
+- [21_external_defines](#21_external_defines)
+- [22_external_defines_lib](#22_external_defines_lib)
+- [23_bits](#23_bits)
+- [30_gpio_input](#30_gpio_input)
 
 ## 01_asm_led_minimal
 Minimal representation of turning on LED using assembler
@@ -75,3 +79,23 @@ typedef struct {
 } REGISTER_typeDef;
 ```
 
+## 21_external_defines
+Same as `20_struct` but register defines is taken form external lib `stm32f446xx.h`.
+This file also got some dependencies. Overall files added:
+- `cmsis_compiler.h`
+- `cmsis_gcc.h`
+- `cmsis_version.h`
+- `core_cm4.h`
+- `mpu_armv7.h`
+- `stm32f446xx.h`
+- `system_stm32f4xx.h`
+
+## 22_external_defines_lib
+Same as `21_external_defines` but external files is grouped in one folder. 
+Requires updating include path in main file.
+
+## 23_bits
+Same as `22_external_defines_lib` its using bit registers. 
+
+## 30_gpio_input
+Get input from GPIO to manipulate LED.
