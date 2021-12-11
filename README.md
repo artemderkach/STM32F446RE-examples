@@ -13,6 +13,9 @@ Examples are listed with incremental complexity, next one adds new element to ex
 - [12_led_constants](#12_led_constants)
 - [13_led_makefile](#13_led_makefile)
 - [14_led_makefile_dir](#14_led_makefile_dir)
+- [15_blinky](#15_blinky)
+- [16_blinky_seconds](#16_blinky_seconds)
+- [20_struct](#20_struct)
 
 ## 01_asm_led_minimal
 Minimal representation of turning on LED using assembler
@@ -56,3 +59,19 @@ Same as `13_led_makefile` but `Makefile` is now creating build directory.<br>
 - `OBJS := $(addprefix $(OBJDIR)/, $(OBJS))` pattern is used to add `build` in front of files
 - `$(OBJDIR)/%.o` target also includes `build`
 - `| $(OBJDIR)` to create directory only once
+
+## 15_blinky
+Same as `14_led_makefile_dir` but LED is now blinking with some frequency.
+
+## 16_blinky_seconds
+Same as `15_blinky` but LED can be set to blink with frequency defined in seconds.
+
+## 20_struct
+Same as `15_blinky` but registers is defined as structures. In a form of:
+```
+typedef struct {
+    volatile uint32_t FIELD;
+    ...
+} REGISTER_typeDef;
+```
+
