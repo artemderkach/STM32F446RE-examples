@@ -20,6 +20,7 @@ Examples are listed with incremental complexity, next one adds new element to ex
 - [22_external_defines_lib](#22_external_defines_lib)
 - [23_bits](#23_bits)
 - [30_gpio_input](#30_gpio_input)
+- [31_uart](#31_uart)
 
 ## 01_asm_led_minimal
 Minimal representation of turning on LED using assembler
@@ -97,5 +98,17 @@ Requires updating include path in main file.
 ## 23_bits
 Same as `22_external_defines_lib` its using bit registers. 
 
+## 24_blinky_external
+Blinky program but every register and constant is used form external library (`system_stm32f4xx.h`)
+
 ## 30_gpio_input
 Get input from GPIO to manipulate LED.
+
+## 31_uart
+Steps to initialize UART:
+1. GPIO:
+   - Enable clock for GPIO
+   - Select PIN to have alternate function
+   - Select alternate function type
+2. UART:
+   - fkld
