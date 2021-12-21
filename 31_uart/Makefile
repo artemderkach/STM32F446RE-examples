@@ -16,6 +16,10 @@ OBJS := $(addprefix $(OBJDIR)/, $(OBJS))
 CC = arm-none-eabi-gcc
 CFLAGS =
 
+ifeq ($(DEBUG), 1)
+	CFLAGS += -g3 -gdwarf-2
+endif
+
 LDFLAGS = -nostartfiles
 LDFLAGS += -TSTM32F446RETx.ld
 

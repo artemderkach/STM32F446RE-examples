@@ -2,6 +2,9 @@
 
 #include "lib/stm32f446xx.h"
 
+#define freq 16000000U // default clock frequency for APB1
+#define baud 1152000U // default baud rate
+
 int main(void) {
     // GPIO
     // Enable clock access
@@ -22,7 +25,7 @@ int main(void) {
     RCC->APB1ENR |= RCC_APB1ENR_USART2EN;
 
     // Configure baud rate
-    USART2->BRR = ((16000000 + (115200/2U))/115200);
+    USART2->BRR = ((freq + (baud/2U))/baud);
 
     // Configure transfer direction
     USART2->CR1 = USART_CR1_TE;
@@ -31,7 +34,7 @@ int main(void) {
     USART2->CR1 |= USART_CR1_UE;
 
     while (1) {
-        while(!(USART2->SR & USART_SR_TXE)){}
+        while(!(USART2->SR & USART_SR_TXE)) {}
         USART2->DR	=  ('E' & 0xFF);
     }
 }
