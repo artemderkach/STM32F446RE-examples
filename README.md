@@ -111,4 +111,7 @@ Steps to initialize UART:
    - Select PIN to have alternate function
    - Select alternate function type
 2. UART:
-   - fkld
+   - Enable clock for UART
+   - Set value to BRR (Baud Rate Register)
+   - Set UART module as output
+   - Enable UART module
