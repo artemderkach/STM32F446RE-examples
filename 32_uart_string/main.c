@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <string.h>
 #include "lib/stm32f446xx.h"
 
 #define freq 16000000U // default clock frequency for APB1
@@ -32,7 +34,11 @@ int main(void) {
     USART2->CR1 |= USART_CR1_UE;
 
     while (1) {
-        while(!(USART2->SR & USART_SR_TXE)) {}
-        USART2->DR	=  ('E' & 0xFF);
+        char some[] = "Hello There!\n\r";
+        int i = 0;
+        for (i = 0; some[i] != '\0'; i++) {
+            while(!(USART2->SR & USART_SR_TXE)) {}
+            USART2->DR	= (some[i] & 0xFF);
+        }
     }
 }

@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <stdio.h>
 
 #include "lib/stm32f446xx.h"
 
@@ -7,6 +8,13 @@
 
 void init_adc(void);
 void init_uart(void);
+
+int __io_putchar(int ch) {
+    while(!(USART2->SR & USART_SR_TXE)) {}
+    USART2->DR = (ch & 0xFF);
+
+    return ch;
+}
 
 int main(void) {
 
@@ -20,13 +28,12 @@ int main(void) {
         ADC1->CR2 |= ADC_CR2_SWSTART;
 
         // wait for ADC conversion to be complete
-        while (ADC1->SR & ADC_SR_EOC) {}
+        while (!(ADC1->SR & ADC_SR_EOC)) {}
 
         // read converted result
         val = ADC1->DR;
 
-        while(!(USART2->SR & USART_SR_TXE)) {}
-        USART2->DR = ('E' & 0xFF);
+        printf("Sensor value : %d \n",(int)val);
     }
 }
 

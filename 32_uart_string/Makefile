@@ -20,7 +20,7 @@ ifeq ($(DEBUG), 1)
 	CFLAGS += -g3 -gdwarf-2
 endif
 
-LDFLAGS = -nostartfiles
+LDFLAGS = -nostartfiles -specs=nosys.specs
 LDFLAGS += -TSTM32F446RETx.ld
 
 # Machine-Dependent Options (ARM)

@@ -10,7 +10,12 @@ SECTIONS {
 
 	.text : {
 	    *(.text)
+	    . = ALIGN(4);
 	} > FLASH
+
+    .heap : {
+	    end = .;
+    } > FLASH
 }
 
 _estack = ORIGIN(SRAM) + LENGTH(SRAM);
