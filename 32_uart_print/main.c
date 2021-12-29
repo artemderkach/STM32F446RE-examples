@@ -1,9 +1,20 @@
 #include <stdio.h>
-#include <string.h>
 #include "lib/stm32f446xx.h"
 
 #define freq 16000000U // default clock frequency for APB1
 #define baud 115200U // default baud rate
+
+int _write(int file, char *ptr, int len){
+    (void)file;
+    int i;
+    for (i =0; i<len; i++){
+        while(!(USART2->SR & USART_SR_TXE)){}
+
+        // Write to transmit data register
+        USART2->DR = (*ptr++ & 0xFF);
+    }
+    return len;
+}
 
 int main(void) {
     // GPIO
@@ -34,11 +45,6 @@ int main(void) {
     USART2->CR1 |= USART_CR1_UE;
 
     while (1) {
-        char some[] = "Hello There!\n\r";
-        int i = 0;
-        for (i = 0; some[i] != '\0'; i++) {
-            while(!(USART2->SR & USART_SR_TXE)) {}
-            USART2->DR	= (some[i] & 0xFF);
-        }
+        printf("Hello There\n\r");
     }
 }

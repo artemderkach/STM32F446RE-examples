@@ -21,6 +21,8 @@ Examples are listed with incremental complexity, next one adds new element to ex
 - [23_bits](#23_bits)
 - [30_gpio_input](#30_gpio_input)
 - [31_uart](#31_uart)
+- [32_uart_printf](#32_uart_printf)
+- [33_adc](#33_adc)
 
 ## 01_asm_led_minimal
 Minimal representation of turning on LED using assembler
@@ -115,3 +117,19 @@ Steps to initialize UART:
    - Set value to BRR (Baud Rate Register)
    - Set UART module as output
    - Enable UART module
+   
+## 32_uart_printf
+Add support for sending strings with `printf` function.
+This requires more initializations in startup file + new sections is added to linker.
+But it's not really reflect the minimal requirements for `printf` to work (will be figured later).
+
+## 33_adc
+Steps to initialize ADC:
+1. GPIO:
+   - Enable clock for GPIO
+   - Select PIN to have analog function
+2. ADC:
+   - Enable clock for ADC
+   - Set conversion sequence start
+   - Set conversion sequence length
+   - Enable ADC module
