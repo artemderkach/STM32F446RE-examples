@@ -4,16 +4,21 @@
 #include "lib/stm32f446xx.h"
 
 #define freq 16000000U // default clock frequency for APB1
-#define baud 1152000U // default baud rate
+#define baud 115200U // default baud rate
 
 void init_adc(void);
 void init_uart(void);
 
-int __io_putchar(int ch) {
-    while(!(USART2->SR & USART_SR_TXE)) {}
-    USART2->DR = (ch & 0xFF);
+int _write(int file, char *ptr, int len){
+    (void)file;
+    int i;
+    for (i =0; i<len; i++){
+        while(!(USART2->SR & USART_SR_TXE)){}
 
-    return ch;
+        // Write to transmit data register
+        USART2->DR = (*ptr++ & 0xFF);
+    }
+    return len;
 }
 
 int main(void) {
@@ -33,7 +38,8 @@ int main(void) {
         // read converted result
         val = ADC1->DR;
 
-        printf("Sensor value : %d \n",(int)val);
+        printf("Sensor value: %d\n\r", (int)val);
+        for (int i = 0; i < 100000; ++i) {}
     }
 }
 
@@ -42,7 +48,7 @@ void init_adc(void) {
     // Enable clock access
     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
 
-    // PA2 analog function mode ([3:2] bit is [1:1])
+    // PA1 analog function mode ([3:2] bit is [1:1])
     GPIOA->MODER |= GPIO_MODER_MODER1_0; // 2-nd bit
     GPIOA->MODER |= GPIO_MODER_MODER1_1; // 3-rd bit
 
