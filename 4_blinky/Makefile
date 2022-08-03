@@ -1,4 +1,0 @@
-
-
-clean:
-	echo "asdf"
