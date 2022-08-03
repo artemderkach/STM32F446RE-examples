@@ -33,6 +33,6 @@ int main(void) {
 
     while (1) {
         while(!(USART2->SR & USART_SR_TXE)) {}
-        USART2->DR	=  ('E' & 0xFF);
+        USART2->DR	=  ('n' & 0xFF);
     }
 }

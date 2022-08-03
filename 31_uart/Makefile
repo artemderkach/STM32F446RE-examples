@@ -1,7 +1,7 @@
 # $@ - target
 # $^ - prerequisite
 
-TARGET := blinky
+TARGET := uart
 OBJDIR := build
 
 SRCS = main.c startup_stm32f446xx.S
@@ -44,7 +44,7 @@ $(OBJDIR):
 	mkdir -p $@
 
 flash:
-	openocd -f board/st_nucleo_f4.cfg -c "program build/blinky.elf verify reset exit"
+	openocd -f board/st_nucleo_f4.cfg -c "program build/uart.elf verify reset exit"
 
 clean:
 	rm -f $(OBJDIR)

@@ -1,6 +1,5 @@
 # $@ - target
 # $^ - prerequisite
-# $< - first prerequisite
 
 OBJDIR := build
 
@@ -22,16 +21,16 @@ LDFLAGS += -TSTM32F446RETx.ld
 # Machine-Dependent Options (ARM)
 MDFLAGS = -mthumb
 
-all: $(OBJS) | $(OBJDIR)
+all: $(OBJS)
 	$(CC) $(LDFLAGS) -o $(OBJDIR)/main.elf $^
 
-$(OBJDIR)/%.o: %.c
+$(OBJDIR)/%.o: %.c | $(OBJDIR)
 	$(CC) $(CFLAGS) $(MDFLAGS) -c -o $@ $^
 
-$(OBJDIR)/%.o: %.s
+$(OBJDIR)/%.o: %.s | $(OBJDIR)
 	$(CC) $(CFLAGS) -c -o $@ $^
 
-$(OBJDIR)/%.o: %.S
+$(OBJDIR)/%.o: %.S | $(OBJDIR)
 	$(CC) $(CFLAGS) -c -o $@ $^
 
 $(OBJDIR):

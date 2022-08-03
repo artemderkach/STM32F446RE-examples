@@ -1,6 +1,9 @@
 This repo is reflecting the learning process of embedded programming.
 Examples are listed with incremental complexity, next one adds new element to existing.
 
+## Some Assembly Instructions
+- `thumb` arm instruction set
+
 ## Common Flags Description
 - `-nostartfiles` - Do not use the standard system startup files when linking
 
@@ -15,7 +18,7 @@ Examples are listed with incremental complexity, next one adds new element to ex
 - [14_led_makefile_dir](#14_led_makefile_dir)
 - [15_blinky](#15_blinky)
 - [16_blinky_seconds](#16_blinky_seconds)
-- [20_struct](#20_struct)
+- [20_registers_as_structs](#20_registers_as_structs)
 - [21_external_defines](#21_external_defines)
 - [22_external_defines_lib](#22_external_defines_lib)
 - [23_bits](#23_bits)
@@ -23,6 +26,7 @@ Examples are listed with incremental complexity, next one adds new element to ex
 - [31_uart](#31_uart)
 - [32_uart_printf](#32_uart_printf)
 - [33_adc](#33_adc)
+- [34_pwm](#34_pwm)
 
 ## 01_asm_led_minimal
 Minimal representation of turning on LED using assembler
@@ -73,7 +77,7 @@ Same as `14_led_makefile_dir` but LED is now blinking with some frequency.
 ## 16_blinky_seconds
 Same as `15_blinky` but LED can be set to blink with frequency defined in seconds.
 
-## 20_struct
+## 20_registers_as_structs
 Same as `15_blinky` but registers is defined as structures. In a form of:
 ```
 typedef struct {
@@ -83,7 +87,7 @@ typedef struct {
 ```
 
 ## 21_external_defines
-Same as `20_struct` but register defines is taken form external lib `stm32f446xx.h`.
+Same as `20_registers_as_structs` but register defines is taken form external lib `stm32f446xx.h`.
 This file also got some dependencies. Overall files added:
 - `cmsis_compiler.h`
 - `cmsis_gcc.h`
@@ -131,5 +135,17 @@ Steps to initialize ADC:
 2. ADC:
    - Enable clock for ADC
    - Set conversion sequence start
+   - Set conversion sequence length
+   - Enable ADC module
+
+## 34_pwm
+Steps to initialize ADC:
+1. GPIO:
+   - Enable clock for GPIO
+   - Select PIN to have alternate function
+   - Select alternate function type
+2. PWM (TIM):
+   - Enable clock for TIM
+   - Set prescaler value (clock divider). freq = clock / prescaler
    - Set conversion sequence length
    - Enable ADC module

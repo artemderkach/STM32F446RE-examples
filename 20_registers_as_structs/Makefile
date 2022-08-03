@@ -1,6 +1,7 @@
 # $@ - target
 # $^ - prerequisite
 
+TARGET := blinky
 OBJDIR := build
 
 SRCS = main.c startup_stm32f446xx.S
@@ -13,11 +14,7 @@ OBJS := $(OBJS:.S=.o)
 OBJS := $(addprefix $(OBJDIR)/, $(OBJS))
 
 CC = arm-none-eabi-gcc
-CFLAGS = -Wall
-
-ifeq ($(DEBUG), 1)
-	CFLAGS += -g3 -gdwarf-2
-endif
+CFLAGS =
 
 LDFLAGS = -nostartfiles
 LDFLAGS += -TSTM32F446RETx.ld
@@ -25,8 +22,10 @@ LDFLAGS += -TSTM32F446RETx.ld
 # Machine-Dependent Options (ARM)
 MDFLAGS = -mthumb
 
-all: $(OBJS)
-	$(CC) $(LDFLAGS) -o $(OBJDIR)/blinky.elf $^
+all: $(OBJDIR)/$(TARGET).elf
+
+$(OBJDIR)/$(TARGET).elf: $(OBJS)
+	$(CC) $(LDFLAGS) -o $@ $^
 
 $(OBJDIR)/%.o: %.c | $(OBJDIR)
 	$(CC) $(CFLAGS) $(MDFLAGS) -c -o $@ $^

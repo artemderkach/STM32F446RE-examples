@@ -1,4 +1,4 @@
-.thumb
+.thumb // select thumb instruction set
 .syntax unified
 
 .section .text
